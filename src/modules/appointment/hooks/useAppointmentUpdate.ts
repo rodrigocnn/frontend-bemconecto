@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { AppointmentUpdate } from "../api";
 import { Dispatch, SetStateAction } from "react";
+import { appointmentKeys } from "../constants/queryKeys";
 
 export function useAppointmentUpdate(
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
@@ -12,11 +13,10 @@ export function useAppointmentUpdate(
     mutationFn: AppointmentUpdate,
     onSuccess: () => {
       toast.success("Agendamento atualizado com sucesso");
-      queryClient.refetchQueries({ queryKey: ["find-appointments"] });
+      queryClient.refetchQueries({
+        queryKey: appointmentKeys.findAllAppointments,
+      });
       setIsModalOpen(false);
-    },
-    onError: () => {
-      toast.error("Erro ao realizar o cadastro");
     },
   });
 }

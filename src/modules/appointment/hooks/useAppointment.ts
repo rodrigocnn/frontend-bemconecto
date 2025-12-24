@@ -80,6 +80,7 @@ export function useAppointment() {
     data,
     handleEventClick,
     bookAppointment,
+    resetFormModal,
     isModalOpen,
     openModal,
     closeModal,
