@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { PatientShowApi } from "../api";
 import { Patient } from "../interfaces";
+import { patientsQueryKeys } from "../constants/patients-query-keys";
 
 export function usePatientShowQuery(id: string) {
   const { data, isLoading, error } = useQuery<Patient>({
-    queryKey: ["query-patient-show", id],
+    queryKey: patientsQueryKeys.showPatient(id),
     queryFn: () => PatientShowApi(id),
     enabled: !!id,
   });

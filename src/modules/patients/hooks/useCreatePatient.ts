@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { PatientCreate } from "../api";
-import { AxiosError } from "axios";
+import { patientsQueryKeys } from "../constants/patients-query-keys";
 
 export function useCreatePatient() {
   const queryClient = useQueryClient();
@@ -13,18 +13,9 @@ export function useCreatePatient() {
     onSuccess: () => {
       router.push("/admin/pacientes");
       toast.success("Paciente criado com sucesso");
-      queryClient.refetchQueries({ queryKey: ["buscar-pacientes"] });
-    },
-    onError: (error: unknown) => {
-      if (error instanceof AxiosError) {
-        const message =
-          (error.response?.data as { message?: string })?.message ||
-          "Erro interno no servidor";
-        toast.error(message);
-        return;
-      }
-
-      toast.error("Erro interno no servidor");
+      queryClient.refetchQueries({
+        queryKey: patientsQueryKeys.findAllInfoPatients,
+      });
     },
   });
 }
