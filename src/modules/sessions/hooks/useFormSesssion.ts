@@ -49,6 +49,7 @@ export function useFormSession(id: string, mode: string) {
 
   return {
     form,
+    setForm,
     onEditorChange,
     handleChange,
     saveSession,

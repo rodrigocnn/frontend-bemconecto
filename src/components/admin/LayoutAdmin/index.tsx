@@ -4,6 +4,8 @@ import { useAuthGuard } from "@/hooks/useAuthGuard";
 import { useLogout } from "@/hooks/useLogout";
 import Link from "next/link";
 import { UserMenu } from "../UserMenu";
+import Image from "next/image";
+import Logo from "./../../../assets/img/logo-bem.png";
 
 const LayoutAdmin = ({ children }: { children: ReactNode }) => {
   const { isChecking } = useAuthGuard();
@@ -28,9 +30,9 @@ const LayoutAdmin = ({ children }: { children: ReactNode }) => {
         {/* Header */}
         <header className="bg-sky-600/100 text-white p-4  flex justify-between items-center shadow-md">
           <div className="flex items-center space-x-8 ">
-            <h1 className="text-xl font-semibold">BEMCONECTO</h1>
+            <Image src={Logo} alt="Logo BemConecto" width={200} />
 
-            <nav className="flex space-x-6">
+            <nav className="flex space-x-6 mt-1">
               {menuItems.map((item) => (
                 <Link
                   key={item.label}
