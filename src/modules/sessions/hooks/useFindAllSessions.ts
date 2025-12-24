@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { sessionsFindAll } from "../api";
 import { Session } from "../interfaces";
+import { sessionsQueryKeys } from "../constants/sessions-query-keys";
 
 export function useFindAllSession(patientId: string) {
   const { data, isLoading, error } = useQuery<Session[]>({
-    queryKey: ["find-all-sessions"],
+    queryKey: sessionsQueryKeys.findAllInfoPatients,
     queryFn: () => sessionsFindAll(patientId),
     enabled: !!patientId,
   });
