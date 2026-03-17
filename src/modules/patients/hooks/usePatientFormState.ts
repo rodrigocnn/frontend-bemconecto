@@ -1,35 +1,41 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Patient } from "../interfaces";
 import { INITIAL_STATE_FORM_CLIENT } from "../constants";
 import { formatCPF, formatPhone } from "@/utils";
-import { patientPersist } from "../validations";
 
-import { useCreatePatient } from "./useCreatePatient";
-import { useUpdatePatient } from "./useUpdatePatient";
-import { persistMapperPatient } from "../mappers";
+export type UsePatientFormStateParams = {
+  initialData?: Patient;
+};
 
-export const useFormPatient = (
-  initialData?: Patient,
-  edit: boolean = false
-) => {
-  const [form, setForm] = useState<Patient>(INITIAL_STATE_FORM_CLIENT);
-  const createPatient = useCreatePatient();
-  const updatePatient = useUpdatePatient();
+export function usePatientFormState(
+  params: UsePatientFormStateParams = {},
+) {
+  const { initialData } = params;
+  const [form, setForm] = useState<Patient>(() => ({
+    ...INITIAL_STATE_FORM_CLIENT,
+    ...(initialData ?? {}),
+  }));
+
+  useEffect(() => {
+    if (initialData) {
+      setForm({
+        ...INITIAL_STATE_FORM_CLIENT,
+        ...initialData,
+      });
+    }
+  }, [initialData]);
 
   const handleChange = (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value } = event.target;
 
-    let formattedValue = value;
-
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: formattedValue,
+      [name]: value,
     }));
   };
 
@@ -44,7 +50,6 @@ export const useFormPatient = (
     }));
   };
 
-  // handleChange para Telefone
   const handleChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
@@ -63,23 +68,6 @@ export const useFormPatient = (
     }));
   };
 
-  const handleSubmit = async (event?: React.FormEvent) => {
-    if (event) event.preventDefault();
-
-    if (await patientPersist(form)) {
-      try {
-        const formMapped = persistMapperPatient(form);
-        if (edit) {
-          updatePatient.mutate(formMapped);
-        } else {
-          createPatient.mutate(formMapped);
-        }
-      } catch (error) {
-        console.error("Erro ao enviar:", error);
-      }
-    }
-  };
-
   const resetForm = () => {
     setForm(INITIAL_STATE_FORM_CLIENT);
   };
@@ -89,10 +77,8 @@ export const useFormPatient = (
     setForm,
     handleChange,
     handleChangeCPF,
-    handleLocationChange,
     handleChangePhone,
-    handleSubmit,
+    handleLocationChange,
     resetForm,
-    createPatient,
   };
-};
+}

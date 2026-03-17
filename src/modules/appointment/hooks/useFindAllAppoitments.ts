@@ -1,19 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { findAllAppointments } from "../api";
-import { AppointmentEvent } from "../interfaces";
+import { ApiResponse, AppointmentEvent } from "../interfaces";
 
 import { appointmentKeys } from "../constants/queryKeys";
 
 export function useFindAllAppoitments() {
-  const { data, isLoading, error } = useQuery<AppointmentEvent[]>({
+  const { data, isLoading, error } = useQuery<
+    ApiResponse<AppointmentEvent[]>
+  >({
     queryKey: appointmentKeys.findAllAppointments,
     queryFn: findAllAppointments,
   });
 
   return {
     isLoading,
-    data,
+    data: data?.data ?? [],
     error,
   };
 }

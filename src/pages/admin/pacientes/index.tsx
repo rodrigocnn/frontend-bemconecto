@@ -9,8 +9,9 @@ import { columnsPatients } from "@/modules/patients/columns";
 import { ButtonApp } from "@/components/admin/Button";
 import LayoutAdmin from "@/components/admin/LayoutAdmin";
 
-export default function Pacientes() {
+export default function Patients() {
   const { data: patients, isLoading } = useFindAllPatients();
+  const emptyRowSelection = { type: "include" as const, ids: new Set() };
 
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     pageSize: 5,
@@ -37,6 +38,17 @@ export default function Pacientes() {
             onPaginationModelChange={setPaginationModel}
             pageSizeOptions={[5, 10]}
             localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+            rowSelection={false}
+            disableColumnSorting={true}
+            disableMultipleRowSelection={true}
+            sx={{
+              "& .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within": {
+                outline: "none",
+              },
+              "& .MuiDataGrid-row.Mui-selected": {
+                backgroundColor: "inherit",
+              },
+            }}
           />
         </div>
       </div>

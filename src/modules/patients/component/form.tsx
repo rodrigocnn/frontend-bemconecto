@@ -1,5 +1,6 @@
 import { Label, TextInput, Spinner, Radio, Textarea } from "flowbite-react";
-import { useFormPatient } from "../hooks/useFormPatient";
+
+import { usePatientFormController } from "../hooks/usePatientFormController";
 import { useEffect } from "react";
 import { Patient } from "../interfaces";
 import { ButtonApp } from "@/components/admin/Button";
@@ -20,7 +21,7 @@ export function FormPatient(props: FormPatientProps) {
     createPatient,
     handleChangeCPF,
     handleChangePhone,
-  } = useFormPatient(initialData, props.edit);
+  } = usePatientFormController(initialData, props.edit);
 
   useEffect(() => {
     if (initialData && Object.keys(initialData).length > 0) {

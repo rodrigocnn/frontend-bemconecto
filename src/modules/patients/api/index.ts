@@ -1,31 +1,33 @@
 import api from "@/services/api";
-import { Patient } from "../interfaces";
+import { ApiResponse, Patient } from "../interfaces";
 
-export const patientsFindAll = async (): Promise<Patient[]> => {
-  const response = await api.index("pacientes");
+export const patientsFindAll = async (): Promise<ApiResponse<Patient[]>> => {
+  const response = await api.index("api/patients");
   return response.data;
 };
 
 export const PatientCreate = async (Patient: Patient): Promise<Patient> => {
-  const response = await api.store("pacientes", Patient);
+  const response = await api.store("api/patients", Patient);
   return response.data;
 };
 
 export const PatientDelete = async (id: string): Promise<Patient> => {
-  const response = await api.delete("pacientes", id);
+  const response = await api.delete("api/patients", id);
   return response.data;
 };
 
-export const PatientShowApi = async (id: string): Promise<Patient> => {
-  const response = await api.show("pacientes", id);
+export const PatientShowApi = async (
+  id: string,
+): Promise<ApiResponse<Patient>> => {
+  const response = await api.show("api/patients", id);
   return response.data;
 };
 
 export const PatientUpdateApi = async (Patient: Patient): Promise<Patient> => {
   const response = await api.update(
-    "pacientes",
+    "api/patients",
     Patient?.id as string,
-    Patient
+    Patient,
   );
   return response.data;
 };

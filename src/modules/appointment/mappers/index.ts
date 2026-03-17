@@ -9,22 +9,23 @@ function buildDateTime(date: string, time: string): string {
 }
 
 export function persistMapperAppointment(
-  data: AppointmentForm
+  data: AppointmentForm,
 ): AppointmentStore {
   return {
+    title: "teste",
     start: buildDateTime(data.date, data.initialTime),
     end: buildDateTime(data.date, data.endTime),
-    status: "SCHEDULED",
     patientId: data.patientId,
   };
 }
 
 export function persistUpdateMapperAppointment(
-  data: AppointmentForm
+  data: AppointmentForm,
 ): AppointmentStore {
   data.date;
 
   return {
+    title: "teste",
     id: data.id,
     start: buildDateTime(data.date, data.initialTime),
     end: buildDateTime(data.date, data.endTime),

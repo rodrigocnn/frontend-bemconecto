@@ -40,5 +40,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# IA Guide
+
+AGENTS.md
+
+# Personal
+
 TODO.md
 NOTES.md

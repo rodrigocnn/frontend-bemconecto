@@ -12,23 +12,22 @@ interface PropsFormModalAgenda {
 export function FormModalAgenda(props: PropsFormModalAgenda) {
   const { form, patients, isModeUpdate = false } = props;
 
-  const {
-    register,
-    formState: { errors },
-  } = form;
+  const { register, watch } = form;
+  const patientId = watch("patientId");
 
   return (
     <>
       <div className="w-full mb-4">
-        <Select
-          {...register("patientId")}
-          defaultValue={""}
-          id="patientId"
-          required
-        >
-          <option value={""}>Selecione um Paciente</option>
+        <Select {...register("patientId")} id="patientId" required>
+          <option value={""} selected={!isModeUpdate || !patientId}>
+            Selecione um Paciente
+          </option>
           {patients?.map((patient) => (
-            <option key={patient.id} value={patient.id}>
+            <option
+              key={patient.id}
+              value={patient.id}
+              selected={isModeUpdate && patientId === patient.id}
+            >
               {patient.name}
             </option>
           ))}

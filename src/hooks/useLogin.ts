@@ -4,10 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
 
-interface LoginResponse {
-  token: string;
-}
-
 export function useLogin() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -18,12 +14,12 @@ export function useLogin() {
     setError(null);
 
     try {
-      const response = await api.login("/login", {
+      const response = await api.login("/api/Auth/login", {
         email,
         password,
       });
+      const { data } = response.data;
 
-      const data: LoginResponse = response.data;
       localStorage.setItem("token", data.token);
       router.push("/admin/home");
     } catch (err: any) {

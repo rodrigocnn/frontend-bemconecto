@@ -30,9 +30,9 @@ export function useAppointment() {
   };
 
   const updateFormModal = (selectedEvent: AppointmentEvent) => {
-    const { patientId, start, end, status, id } = selectedEvent;
+    const { patientId, userId, start, end, status, id } = selectedEvent;
     form.setValue("id", id);
-    form.setValue("patientId", patientId);
+    form.setValue("patientId", patientId ?? userId ?? "");
     form.setValue("date", getDateFromISO(start));
     form.setValue("initialTime", getTimeFromISO(start));
     form.setValue("endTime", getTimeFromISO(end));
@@ -66,6 +66,7 @@ export function useAppointment() {
       const idAppointment = form.getValues("id");
       const dataForm = { ...data };
       dataForm.id = idAppointment;
+
       const payload = persistUpdateMapperAppointment(dataForm);
       appointmentUpdate.mutate(payload);
     } else {

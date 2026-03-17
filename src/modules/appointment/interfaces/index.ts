@@ -13,6 +13,7 @@ export interface AppointmentEvent {
   status: AppointmentStatus;
   psychologistId: string;
   patientId: string;
+  userId?: string;
   backgroundColor: string;
   textColor: string;
   display: string;
@@ -26,7 +27,7 @@ export interface AppointmentStore {
   id?: string;
   start: string;
   end: string;
-  status: AppointmentStatus;
+  status?: AppointmentStatus;
   patientId: string;
 }
 
@@ -38,3 +39,9 @@ export interface AppointmentForm {
   endTime: string;
   status?: AppointmentStatus;
 }
+
+export type ApiResponse<T> = {
+  success: boolean;
+  data: T;
+  notifications: unknown[];
+};

@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from "react";
 import { appointmentKeys } from "../constants/queryKeys";
 
 export function useAppointmentUpdate(
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>,
 ) {
   const queryClient = useQueryClient();
 
