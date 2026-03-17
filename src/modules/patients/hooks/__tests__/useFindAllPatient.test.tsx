@@ -17,9 +17,13 @@ jest.mock("../../api", () => ({
 
 describe("useFindAllPatients", () => {
   it("Should reset form with initial values", async () => {
-    const mockData = [
-      { id: "1", name: "John Doe", email: "john@example.com", phone: "9999" },
-    ];
+    const mockData = {
+      success: true,
+      data: [
+        { id: "1", name: "John Doe", email: "john@example.com", phone: "9999" },
+      ],
+      notifications: [],
+    };
 
     (patientsFindAll as jest.Mock).mockResolvedValueOnce(mockData);
 
@@ -28,6 +32,6 @@ describe("useFindAllPatients", () => {
     await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     expect(patientsFindAll).toHaveBeenCalledTimes(1);
-    expect(result.current.data).toEqual(mockData);
+    expect(result.current.data).toEqual(mockData.data);
   });
 });

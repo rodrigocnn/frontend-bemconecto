@@ -2,7 +2,7 @@ import React from "react";
 import { renderHook } from "@testing-library/react";
 import { act } from "react";
 
-import { useFormPatient } from "../useFormPatient";
+import { usePatientFormController } from "../usePatientFormController";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { INITIAL_STATE_FORM_CLIENT } from "../../constants";
 import { formatCPF, formatPhone } from "@/utils";
@@ -43,7 +43,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
   <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 );
 
-describe("useFormPatient", () => {
+describe("usePatientFormController", () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -55,7 +55,7 @@ describe("useFormPatient", () => {
   });
 
   it("Should reset form with initial values", async () => {
-    const { result } = renderHook(() => useFormPatient(), { wrapper });
+    const { result } = renderHook(() => usePatientFormController(), { wrapper });
 
     act(() => {
       result.current.setForm(INITIAL_STATE_FORM_CLIENT);
@@ -69,7 +69,7 @@ describe("useFormPatient", () => {
   });
 
   it("Should update form location when handleLocationChange is called", async () => {
-    const { result } = renderHook(() => useFormPatient(), { wrapper });
+    const { result } = renderHook(() => usePatientFormController(), { wrapper });
 
     const updateForm = {
       ...INITIAL_STATE_FORM_CLIENT,
@@ -84,7 +84,7 @@ describe("useFormPatient", () => {
   });
 
   it("should update the form phone field with formatted value", () => {
-    const { result } = renderHook(() => useFormPatient(), { wrapper });
+    const { result } = renderHook(() => usePatientFormController(), { wrapper });
 
     const event = {
       target: {
@@ -101,7 +101,7 @@ describe("useFormPatient", () => {
   });
 
   it("should update the form cpf field with formatted value", () => {
-    const { result } = renderHook(() => useFormPatient(), { wrapper });
+    const { result } = renderHook(() => usePatientFormController(), { wrapper });
 
     const event = {
       target: {
@@ -118,7 +118,7 @@ describe("useFormPatient", () => {
   });
 
   it("should update the form when handleChange is called", () => {
-    const { result } = renderHook(() => useFormPatient(), { wrapper });
+    const { result } = renderHook(() => usePatientFormController(), { wrapper });
 
     const event = {
       target: {
@@ -135,7 +135,7 @@ describe("useFormPatient", () => {
   });
 
   it("should submit form to create patient", async () => {
-    const { result } = renderHook(() => useFormPatient(), { wrapper });
+    const { result } = renderHook(() => usePatientFormController(), { wrapper });
     const mockPreventDefault = jest.fn();
 
     jest.spyOn(validations, "patientPersist").mockResolvedValue(true);

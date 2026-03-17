@@ -18,9 +18,16 @@ jest.mock("../../api", () => ({
 
 describe("usePatientShowQuery", () => {
   it("Should call PatientShowApi correctly", async () => {
-    const mockData = [
-      { id: "1", name: "John Doe", email: "john@example.com", phone: "9999" },
-    ];
+    const mockData = {
+      success: true,
+      data: {
+        id: "1",
+        name: "John Doe",
+        email: "john@example.com",
+        phone: "9999",
+      },
+      notifications: [],
+    };
 
     (PatientShowApi as jest.Mock).mockResolvedValueOnce(mockData);
 
@@ -29,6 +36,6 @@ describe("usePatientShowQuery", () => {
     await waitFor(() => expect(result.current.isLoading).toBe(false));
 
     expect(PatientShowApi).toHaveBeenCalledTimes(1);
-    expect(result.current.data).toEqual(mockData);
+    expect(result.current.data).toEqual(mockData.data);
   });
 });

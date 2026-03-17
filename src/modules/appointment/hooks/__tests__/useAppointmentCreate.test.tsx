@@ -19,9 +19,13 @@ jest.mock("../../api", () => ({
 
 describe("useAppointmentCreate", () => {
   it("Should call create mutate correctly", async () => {
-    (AppointmentCreate as jest.Mock).mockResolvedValueOnce(
-      mockAppointmentStore
-    );
+    const mockResponse = {
+      success: true,
+      data: mockAppointmentStore,
+      notifications: [],
+    };
+
+    (AppointmentCreate as jest.Mock).mockResolvedValueOnce(mockResponse);
 
     const setIsModalOpen: Dispatch<SetStateAction<boolean>> = jest.fn();
 
@@ -33,6 +37,6 @@ describe("useAppointmentCreate", () => {
     await waitFor(() => expect(result.current.isSuccess).toBe(false));
 
     expect(AppointmentCreate).toHaveBeenCalledTimes(1);
-    expect(result.current.data).toEqual(mockAppointmentStore);
+    expect(result.current.data).toEqual(mockResponse);
   });
 });
