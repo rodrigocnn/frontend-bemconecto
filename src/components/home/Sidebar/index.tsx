@@ -20,7 +20,7 @@ import { BsCashStack } from "react-icons/bs";
 import { useState } from "react";
 
 import Logo from "./../assets/img/logo.png";
-import ItemSidebar from "./ItemSidebar";
+import ItemSidebar from "../ItemSidebar";
 
 export function Sidebar() {
   const [configOpen, setConfigOpen] = useState(false);

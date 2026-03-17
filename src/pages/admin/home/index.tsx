@@ -11,7 +11,7 @@ import { MdCancel } from "react-icons/md";
 import { ImCheckboxChecked } from "react-icons/im";
 
 import { CardDashboard } from "@/components/admin/CardDashboard";
-import { getChartData } from "./charts";
+import { getChartData } from "@/modules/dashboard/charts";
 import { useGetInfoDashboard } from "@/modules/dashboard/hooks/useGetInfoDashboard";
 import LayoutAdmin from "@/components/admin/LayoutAdmin";
 

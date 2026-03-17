@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import topo from "./../assets/img/topo.webp";
-import { SearchProperty } from "./SearchProperty";
+import { SearchProperty } from "../SearchProperty";
 
 export function Hero() {
   return (

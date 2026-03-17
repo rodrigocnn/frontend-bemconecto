@@ -9,6 +9,7 @@ import { formatCPF, formatPhone } from "@/utils";
 
 import { Patient } from "../../interfaces";
 import * as validations from "../../validations";
+import { useCreatePatient } from "../useCreatePatient";
 
 jest.mock("next/router", () => ({
   useRouter: jest.fn().mockReturnValue({
@@ -18,6 +19,10 @@ jest.mock("next/router", () => ({
     query: {},
     asPath: "/",
   }),
+}));
+
+jest.mock("../useCreatePatient", () => ({
+  useCreatePatient: jest.fn(),
 }));
 
 export const mockPatient: Patient = {
@@ -46,12 +51,9 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 describe("usePatientFormController", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-
-    jest
-      .spyOn(require("../useCreatePatient"), "useCreatePatient")
-      .mockReturnValue({
-        mutate: mockCreateMutate,
-      });
+    (useCreatePatient as jest.Mock).mockReturnValue({
+      mutate: mockCreateMutate,
+    });
   });
 
   it("Should reset form with initial values", async () => {

@@ -1,13 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
+import type { QueryFunction } from "@tanstack/react-query";
 import { findAllInfoDashboard } from "../api";
 import { useEffect, useState } from "react";
 import { createChartOptions, rentalReceived } from "../charts";
 import { ApexOptions } from "apexcharts";
 
+type DashboardLegacyData = {
+  total_clients: number;
+  total_owners: number;
+  total_properties: number;
+  total_rental_contracts: number;
+  total_cities: number;
+  total_neighborhoods: number;
+  monthly_received_rents: Array<{ amount: number }>;
+};
+
 export function useDashboard() {
-  const { data, isLoading } = useQuery({
+  const queryFn: QueryFunction<DashboardLegacyData> = async () =>
+    (await findAllInfoDashboard()) as unknown as DashboardLegacyData;
+
+  const { data, isLoading } = useQuery<DashboardLegacyData>({
     queryKey: ["dashboard"],
-    queryFn: () => findAllInfoDashboard(),
+    queryFn,
   });
 
   const [chartRegisters, setChartRegisters] = useState<

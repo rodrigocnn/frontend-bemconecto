@@ -12,7 +12,6 @@ export function persistMapperAppointment(
   data: AppointmentForm,
 ): AppointmentStore {
   return {
-    title: "teste",
     start: buildDateTime(data.date, data.initialTime),
     end: buildDateTime(data.date, data.endTime),
     patientId: data.patientId,
@@ -25,7 +24,6 @@ export function persistUpdateMapperAppointment(
   data.date;
 
   return {
-    title: "teste",
     id: data.id,
     start: buildDateTime(data.date, data.initialTime),
     end: buildDateTime(data.date, data.endTime),

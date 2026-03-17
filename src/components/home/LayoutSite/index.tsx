@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
-import Topbar from "./Topbar";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Topbar from "../Topbar";
+import { Footer, Navbar } from "flowbite-react";
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
