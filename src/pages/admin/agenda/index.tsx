@@ -4,11 +4,11 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 import LayoutAdmin from "@/components/admin/LayoutAdmin";
-import { FormModalAgenda } from "@/modules/appointment/components/form-modal-agenda";
-import { useAppointment } from "@/modules/appointment/hooks/useAppointment";
+import { FormModalAgenda } from "@/modules/appointments/components/form-modal-agenda";
+import { useAppointmentController } from "@/modules/appointments/hooks/useAppointmentController";
 import { useFindAllPatients } from "@/modules/patients/hooks/useFindAllPatients";
-import { useFindAllAppoitments } from "@/modules/appointment/hooks/useFindAllAppoitments";
-import { renderEventContent } from "@/modules/appointment/components/render-event-content";
+import { useFindAllAppointments } from "@/modules/appointments/hooks/useFindAllAppointments";
+import { renderEventContent } from "@/modules/appointments/components/render-event-content";
 import { CustomModal } from "@/components/admin/Modal";
 
 export default function Appointment() {
@@ -20,10 +20,10 @@ export default function Appointment() {
     bookAppointment,
     form,
     isModeUpdate,
-  } = useAppointment();
+  } = useAppointmentController();
 
   const { data: patients, isLoading } = useFindAllPatients();
-  const { data: events } = useFindAllAppoitments();
+  const { data: events } = useFindAllAppointments();
 
   return (
     <LayoutAdmin>

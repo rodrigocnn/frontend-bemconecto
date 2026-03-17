@@ -5,7 +5,7 @@ import { ApiResponse, AppointmentEvent } from "../interfaces";
 
 import { appointmentKeys } from "../constants/queryKeys";
 
-export function useFindAllAppoitments() {
+export function useFindAllAppointments() {
   const { data, isLoading, error } = useQuery<
     ApiResponse<AppointmentEvent[]>
   >({
