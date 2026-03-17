@@ -4,7 +4,7 @@ import { AppointmentCreate } from "../../api";
 import { renderHook, waitFor } from "@testing-library/react";
 
 import { useAppointmentCreate } from "../useAppointmentCreate";
-import { act, Dispatch, SetStateAction } from "react";
+import { act } from "react";
 import { mockAppointmentStore } from "../../mocks";
 
 const queryClient = new QueryClient();
@@ -27,9 +27,7 @@ describe("useAppointmentCreate", () => {
 
     (AppointmentCreate as jest.Mock).mockResolvedValueOnce(mockResponse);
 
-    const setIsModalOpen: Dispatch<SetStateAction<boolean>> = jest.fn();
-
-    const { result } = renderHook(() => useAppointmentCreate(setIsModalOpen), {
+    const { result } = renderHook(() => useAppointmentCreate(), {
       wrapper,
     });
 
@@ -37,6 +35,6 @@ describe("useAppointmentCreate", () => {
     await waitFor(() => expect(result.current.isSuccess).toBe(false));
 
     expect(AppointmentCreate).toHaveBeenCalledTimes(1);
-    expect(result.current.data).toEqual(mockResponse);
+    expect(result.current.data).toEqual(mockAppointmentStore);
   });
 });
