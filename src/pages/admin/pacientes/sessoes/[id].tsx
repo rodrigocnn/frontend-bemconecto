@@ -3,7 +3,7 @@ import { DataGrid, GridPaginationModel } from "@mui/x-data-grid";
 
 import { useState } from "react";
 
-import { useFindAllSession } from "@/modules/sessions/hooks/useFindAllSessions";
+import { useFindAllSessions } from "@/modules/sessions/hooks/useFindAllSessions";
 import { columnsSessions } from "@/modules/sessions/columns";
 import Link from "next/link";
 import { ButtonApp } from "@/components/admin/Button";
@@ -19,7 +19,7 @@ export default function Pacientes() {
 
   const router = useRouter();
   const patientId = router.query.id as string;
-  const { data: sessions, isLoading } = useFindAllSession(patientId);
+  const { data: sessions, isLoading } = useFindAllSessions(patientId);
 
   return (
     <LayoutAdmin>

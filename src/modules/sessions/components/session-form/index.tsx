@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "flowbite-react";
 import { useRouter } from "next/router";
 
-import { useFormSession } from "../../hooks/useFormSesssion";
+import { useSessionFormController } from "../../hooks/useSessionFormController";
 import { FormSession } from "../../interfaces";
 
 interface SessionFormProps {
@@ -12,7 +12,7 @@ interface SessionFormProps {
 
 export function SessionForm(props: SessionFormProps) {
   const router = useRouter();
-  const { form, saveSession, handleChange } = useFormSession(
+  const { form, saveSession, handleChange } = useSessionFormController(
     router.query.id as string,
     props.mode
   );
