@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, renderHook } from "@testing-library/react";
-import { useFormSession } from "../useFormSesssion";
+import { useSessionFormController } from "../useSessionFormController";
 import * as validations from "../../validations/";
 import { persistMapperSession, updateMapperSession } from "../../mappers";
 
@@ -42,15 +42,18 @@ jest.mock("../useEditSession", () => ({
   }),
 }));
 
-describe("useFormSession", () => {
+describe("useSessionFormController", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("Should handleChange form correctly", () => {
-    const { result } = renderHook(() => useFormSession("1", "create"), {
-      wrapper,
-    });
+    const { result } = renderHook(
+      () => useSessionFormController("1", "create"),
+      {
+        wrapper,
+      },
+    );
 
     act(() => {
       result.current.handleChange(fakeEvent, "summary");
@@ -62,9 +65,12 @@ describe("useFormSession", () => {
   it("Should in mode create save session correctly", async () => {
     jest.spyOn(validations, "sessionValidation").mockResolvedValue(true);
 
-    const { result } = renderHook(() => useFormSession("1", "create"), {
-      wrapper,
-    });
+    const { result } = renderHook(
+      () => useSessionFormController("1", "create"),
+      {
+        wrapper,
+      },
+    );
 
     act(() => {
       result.current.setForm(form);
@@ -88,9 +94,12 @@ describe("useFormSession", () => {
   it("Should in mode edit save session correctly", async () => {
     jest.spyOn(validations, "sessionValidation").mockResolvedValue(true);
 
-    const { result } = renderHook(() => useFormSession("1", "edit"), {
-      wrapper,
-    });
+    const { result } = renderHook(
+      () => useSessionFormController("1", "edit"),
+      {
+        wrapper,
+      },
+    );
 
     act(() => {
       result.current.setForm(form);
