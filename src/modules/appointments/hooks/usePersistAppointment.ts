@@ -39,6 +39,7 @@ export function usePersistAppointment(
   const updateAppointment = useCallback(
     async (data: AppointmentForm) => {
       try {
+        if (!(await appointmentValidation(data))) return;
         const payload = persistUpdateMapperAppointment(data);
         await appointmentUpdate.mutateAsync(payload);
         onSuccess?.();

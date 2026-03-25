@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { sessionFindOne } from "../api";
-import { Session } from "../interfaces";
+import { sessionFindPatientSummary } from "../api";
+import { PatientSummary } from "../interfaces";
 import { sessionsQueryKeys } from "../constants/sessions-query-keys";
 import { ApiResponse } from "@/modules/appointments/interfaces";
 
-export function useFindSession(id: string) {
-  const { data, isLoading, error } = useQuery<ApiResponse<Session>>({
+export function useFindPatientSummary(id: string) {
+  const { data, isLoading, error } = useQuery<ApiResponse<PatientSummary>>({
     queryKey: sessionsQueryKeys.showSession(id),
-    queryFn: () => sessionFindOne(id),
+    queryFn: () => sessionFindPatientSummary(id),
     enabled: !!id,
   });
 

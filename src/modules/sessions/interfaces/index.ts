@@ -21,6 +21,12 @@ export interface FormSession {
   therapeuticPlans?: string;
   diagnosticHypotheses?: string;
   techniqueUsed?: string;
-  status?: string;
   sessionDate?: string;
+}
+
+export interface PatientSummary {
+  name: string;
+  age: number;
+  qtdServices: number;
+  initialDate: string;
 }

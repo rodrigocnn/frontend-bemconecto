@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import { DataGrid, GridPaginationModel } from "@mui/x-data-grid";
-
 import { useState } from "react";
+import Link from "next/link";
 
+import LayoutAdmin from "@/components/admin/LayoutAdmin";
 import { useFindAllSessions } from "@/modules/sessions/hooks/useFindAllSessions";
 import { columnsSessions } from "@/modules/sessions/columns";
-import Link from "next/link";
 import { ButtonApp } from "@/components/admin/Button";
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
-import { CardDashboard } from "@/components/admin/CardDashboard";
 import { PatientSummaryLine } from "@/modules/patients/component/patient-summary-line";
+import { useFindPatientSummary } from "@/modules/sessions/hooks/useFindPatientSummary";
+import { formatDateBR } from "@/shared/date";
 
 export default function Pacientes() {
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
@@ -20,6 +20,7 @@ export default function Pacientes() {
   const router = useRouter();
   const patientId = router.query.id as string;
   const { data: sessions, isLoading } = useFindAllSessions(patientId);
+  const { data: patientSummary } = useFindPatientSummary(patientId);
 
   return (
     <LayoutAdmin>
@@ -31,10 +32,10 @@ export default function Pacientes() {
         </Link>
 
         <PatientSummaryLine
-          name="Rodrigo César"
-          age={32}
-          totalAppointments={14}
-          firstDate="15/02/2023"
+          name={patientSummary?.data.name || "-"}
+          age={patientSummary?.data.age || 0}
+          totalAppointments={patientSummary?.data.qtdServices || 0}
+          firstDate={formatDateBR(patientSummary?.data.initialDate)}
           lastDate="10/10/2025"
         />
 

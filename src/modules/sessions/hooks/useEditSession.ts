@@ -11,7 +11,7 @@ export function useEditSession() {
   return useMutation({
     mutationFn: editSession,
     onSuccess: (data) => {
-      router.push(`/admin/pacientes/sessoes/${data.patientId}`);
+      router.push(`/admin/pacientes/sessoes/${data.data.patientId}`);
       toast.success("Sessão atualizada com sucesso");
       queryClient.refetchQueries({
         queryKey: sessionsQueryKeys.findAllInfoPatients,

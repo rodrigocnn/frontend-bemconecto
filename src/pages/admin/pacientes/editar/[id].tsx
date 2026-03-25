@@ -11,7 +11,7 @@ export default function PatientEdit() {
 
   return (
     <LayoutAdmin>
-      <h2 className="text-2xl font-semibold  mb-4">Editar Cliente</h2>
+      <h2 className="text-2xl font-semibold  mb-4">Editar Paciente</h2>
       <FormPatient edit={true} initialData={patient as Patient} />
     </LayoutAdmin>
   );

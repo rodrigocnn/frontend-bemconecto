@@ -1,19 +1,17 @@
 import LayoutLogin from "@/components/LayoutLogin";
 import { useLogin } from "@/hooks/useLogin";
-import { useDashboard } from "@/modules/dashboard/hooks/useDashboard";
+
 import { useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error } = useLogin();
+  const { login, error, loading } = useLogin();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await login(email, password);
   };
-
-  const { isLoading } = useDashboard();
 
   return (
     <LayoutLogin>
@@ -65,10 +63,10 @@ export default function Login() {
         </div>
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={loading}
           className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
         >
-          {isLoading ? "Carregando servidor" : "Entrar"}
+          {loading ? "Carregando servidor" : "Entrar"}
         </button>
         {error && <p className="bg-red-500 text-white p-2 rounded">{error}</p>}
       </form>

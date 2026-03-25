@@ -6,7 +6,7 @@ export function useSessionFormController(id: string, mode: string) {
   const shouldFetch = mode === "edit";
   const findOne = useFindSession(shouldFetch ? id : "");
   const formState = useSessionFormState({
-    initialData: shouldFetch ? findOne.data : undefined,
+    initialData: shouldFetch ? findOne.data?.data : undefined,
   });
   const { saveSession } = usePersistSession({ mode, patientId: id });
 

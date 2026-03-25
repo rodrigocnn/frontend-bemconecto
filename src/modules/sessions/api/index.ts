@@ -1,27 +1,49 @@
 import api from "@/services/api";
-import { Session } from "../interfaces";
+import { ApiResponse } from "@/modules/appointments/interfaces";
+import { PatientSummary, Session } from "../interfaces";
 
-export const createSession = async (session: Session): Promise<Session> => {
-  const response = await api.store("sessao", session);
+export const createSession = async (
+  session: Session,
+): Promise<ApiResponse<Session>> => {
+  const response = await api.store("api/sessions", session);
   return response.data;
 };
 
-export const editSession = async (session: Session): Promise<Session> => {
-  const response = await api.update("sessao", session.id as string, session);
+export const editSession = async (
+  session: Session,
+): Promise<ApiResponse<Session>> => {
+  const response = await api.update(
+    "api/sessions",
+    session.id as string,
+    session,
+  );
   return response.data;
 };
 
-export const sessionsFindAll = async (id: string): Promise<Session[]> => {
-  const response = await api.show("sessao", id);
+export const sessionsFindAll = async (
+  id: string,
+): Promise<ApiResponse<Session[]>> => {
+  const response = await api.show("api/sessions", id);
   return response.data;
 };
 
-export const sessionFindOne = async (id: string): Promise<Session> => {
-  const response = await api.show("sessao-show", id);
+export const sessionFindOne = async (
+  id: string,
+): Promise<ApiResponse<Session>> => {
+  const response = await api.show("api/sessions/show", id);
   return response.data;
 };
 
-export const sessionDelete = async (id: string): Promise<Session> => {
-  const response = await api.delete("sessao", id);
+export const sessionFindPatientSummary = async (
+  id: string,
+): Promise<ApiResponse<PatientSummary>> => {
+  const response = await api.show("api/sessions/attend", id);
+  return response.data;
+};
+
+export const sessionDelete = async (
+  id: string,
+): Promise<ApiResponse<Session>> => {
+  const response = await api.delete("api/sessions", id);
   return response.data;
 };

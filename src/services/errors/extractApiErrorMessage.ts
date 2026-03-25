@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 export type ApiErrorPayload = {
   message?: string;
   error?: string | string[];
-  notificacoes?: { mensagem: string }[];
+  notifications?: string[] | { mensagem?: string }[];
 };
 
 export function extractApiErrorMessage(error: unknown): string {
@@ -17,8 +17,15 @@ export function extractApiErrorMessage(error: unknown): string {
     return "Erro de comunicação com o servidor";
   }
 
-  if (data.notificacoes?.length) {
-    return data.notificacoes.map((n) => n.mensagem).join(", ");
+  if (Array.isArray(data.notifications)) {
+    const items = data.notifications;
+    if (items.length && typeof items[0] === "string") {
+      return (items as string[]).join(", ");
+    }
+    return (items as { mensagem?: string }[])
+      .map((n) => n.mensagem)
+      .filter(Boolean)
+      .join(", ");
   }
 
   if (Array.isArray(data.error)) {

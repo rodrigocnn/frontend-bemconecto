@@ -5,7 +5,16 @@ import {
 } from "../interfaces";
 
 function buildDateTime(date: string, time: string): string {
-  return new Date(`${date}T${time}:00.000Z`).toISOString();
+  const [year, month, day] = date.split("-").map(Number);
+  const [hours, minutes] = time.split(":").map(Number);
+  const localDate = new Date(year, month - 1, day, hours, minutes, 0);
+  const offsetMinutes = -localDate.getTimezoneOffset();
+  const sign = offsetMinutes >= 0 ? "+" : "-";
+  const absOffset = Math.abs(offsetMinutes);
+  const offsetHours = String(Math.floor(absOffset / 60)).padStart(2, "0");
+  const offsetMins = String(absOffset % 60).padStart(2, "0");
+
+  return `${date}T${time}:00${sign}${offsetHours}:${offsetMins}`;
 }
 
 export function persistMapperAppointment(
@@ -28,6 +37,6 @@ export function persistUpdateMapperAppointment(
     start: buildDateTime(data.date, data.initialTime),
     end: buildDateTime(data.date, data.endTime),
     status: data.status as AppointmentStatus,
-    patientId: data.patientId,
+    patientId: data.patientId || null,
   };
 }

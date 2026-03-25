@@ -40,9 +40,15 @@ export const PatientSummaryLine: React.FC<PatientSummaryLineProps> = ({
         <div className="flex flex-col">
           <p className="text-sm text-gray-600">Período</p>
           <div className="flex items-center gap-1 text-base font-semibold text-gray-800">
-            <span>{firstDate}</span>
-            <span className="text-gray-400">→</span>
-            <span>{lastDate}</span>
+            {firstDate != "-" ? (
+              <>
+                <span>{firstDate}</span>
+                <span className="text-gray-400">→</span>
+                <span>{lastDate}</span>
+              </>
+            ) : (
+              <span>-</span>
+            )}
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ export function SessionForm(props: SessionFormProps) {
   const router = useRouter();
   const { form, saveSession, handleChange } = useSessionFormController(
     router.query.id as string,
-    props.mode
+    props.mode,
   );
 
   const fields: { name: keyof FormSession; label: string }[] = [

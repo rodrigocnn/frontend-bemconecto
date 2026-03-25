@@ -28,7 +28,7 @@ export interface AppointmentStore {
   start: string;
   end: string;
   status?: AppointmentStatus;
-  patientId: string;
+  patientId: string | null;
 }
 
 export interface AppointmentForm {
