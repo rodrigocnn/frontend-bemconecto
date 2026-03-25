@@ -10,10 +10,10 @@ import { FaCalendarCheck } from "react-icons/fa6";
 import { MdCancel } from "react-icons/md";
 import { ImCheckboxChecked } from "react-icons/im";
 
-import { CardDashboard } from "@/components/admin/CardDashboard";
-import { getChartData } from "@/modules/dashboard/charts";
-import { useGetInfoDashboard } from "@/modules/dashboard/hooks/useGetInfoDashboard";
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
+import { CardDashboard } from "@/widgets/admin-dashboard-card";
+import { getChartData } from "@/features/dashboard/lib/charts";
+import { useGetInfoDashboard } from "@/features/dashboard/model/useGetInfoDashboard";
+import LayoutAdmin from "@/widgets/admin-layout";
 
 export default function Home() {
   const { data } = useGetInfoDashboard();

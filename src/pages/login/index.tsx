@@ -1,5 +1,5 @@
-import LayoutLogin from "@/components/LayoutLogin";
-import { useLogin } from "@/hooks/useLogin";
+import LayoutLogin from "@/widgets/login-layout";
+import { useLogin } from "@/features/auth/login/model/useLogin";
 
 import { useState } from "react";
 

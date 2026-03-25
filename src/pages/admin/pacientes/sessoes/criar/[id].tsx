@@ -1,7 +1,7 @@
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
+import LayoutAdmin from "@/widgets/admin-layout";
 
-import { StopWatch } from "@/modules/sessions/components/stopwatch";
-import { SessionForm } from "@/modules/sessions/components/session-form";
+import { StopWatch } from "@/features/sessions/ui/StopWatch";
+import { SessionForm } from "@/features/sessions/ui/SessionForm";
 
 export default function CriarSessaoPaciente() {
   return (

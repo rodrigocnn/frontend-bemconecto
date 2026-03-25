@@ -3,11 +3,11 @@ import Link from "next/link";
 import { DataGrid, GridPaginationModel } from "@mui/x-data-grid";
 import { ptBR } from "@mui/x-data-grid/locales";
 import { useState } from "react";
-import { useFindAllPatients } from "@/modules/patients/hooks/useFindAllPatients";
-import { columnsPatients } from "@/modules/patients/columns";
+import { useFindAllPatients } from "@/features/patients/model/useFindAllPatients";
+import { columnsPatients } from "@/features/patients/ui/columns";
 
-import { ButtonApp } from "@/components/admin/Button";
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
+import { ButtonApp } from "@/shared/ui/button";
+import LayoutAdmin from "@/widgets/admin-layout";
 
 export default function Patients() {
   const { data: patients, isLoading } = useFindAllPatients();

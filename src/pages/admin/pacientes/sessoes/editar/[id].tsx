@@ -1,5 +1,5 @@
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
-import { SessionForm } from "@/modules/sessions/components/session-form";
+import LayoutAdmin from "@/widgets/admin-layout";
+import { SessionForm } from "@/features/sessions/ui/SessionForm";
 
 export default function EditarSessaoPaciente() {
   return (

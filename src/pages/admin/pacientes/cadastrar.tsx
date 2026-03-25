@@ -1,5 +1,5 @@
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
-import { FormPatient } from "@/modules/patients/component/form";
+import LayoutAdmin from "@/widgets/admin-layout";
+import { FormPatient } from "@/features/patients/ui/FormPatient";
 
 export default function PatientCreate() {
   return (

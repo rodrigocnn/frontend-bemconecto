@@ -3,13 +3,13 @@ import { DataGrid, GridPaginationModel } from "@mui/x-data-grid";
 import { useState } from "react";
 import Link from "next/link";
 
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
-import { useFindAllSessions } from "@/modules/sessions/hooks/useFindAllSessions";
-import { columnsSessions } from "@/modules/sessions/columns";
-import { ButtonApp } from "@/components/admin/Button";
-import { PatientSummaryLine } from "@/modules/patients/component/patient-summary-line";
-import { useFindPatientSummary } from "@/modules/sessions/hooks/useFindPatientSummary";
-import { formatDateBR } from "@/shared/date";
+import LayoutAdmin from "@/widgets/admin-layout";
+import { useFindAllSessions } from "@/features/sessions/model/useFindAllSessions";
+import { columnsSessions } from "@/features/sessions/ui/columns";
+import { ButtonApp } from "@/shared/ui/button";
+import { PatientSummaryLine } from "@/features/patients/ui/PatientSummaryLine";
+import { useFindPatientSummary } from "@/features/sessions/model/useFindPatientSummary";
+import { formatDateBR } from "@/shared/lib/date";
 
 export default function Pacientes() {
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({

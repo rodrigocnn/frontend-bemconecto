@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
-import LayoutAdmin from "@/components/admin/LayoutAdmin";
-import { FormPatient } from "@/modules/patients/component/form";
-import { usePatientShowQuery } from "@/modules/patients/hooks/usePatientShowQuery";
-import { Patient } from "@/modules/patients/interfaces";
+import LayoutAdmin from "@/widgets/admin-layout";
+import { FormPatient } from "@/features/patients/ui/FormPatient";
+import { usePatientShowQuery } from "@/features/patients/model/usePatientShowQuery";
+import { Patient } from "@/entities/patient/types";
 
 export default function PatientEdit() {
   const router = useRouter();
