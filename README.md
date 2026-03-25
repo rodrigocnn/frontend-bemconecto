@@ -63,18 +63,20 @@ npm run dev
 
 ---
 
-## 🗂 Project Structure
+## 🗂 Project Structure (FSD)
 
 src/  
-├── assets/ → Static files or additional styles (e.g., images, SVGs, fonts)  
-├── components/ → Reusable UI components (buttons, inputs, modals, etc.)  
-├── hooks/ → Custom React hooks for shared logic  
-├── interfaces/ → TypeScript interfaces and type definitions  
-├── modules/ → Domain-based modules (auth, dashboard, etc.)  
-├── pages/ → Main pages linked to routes  
-├── services/ → API communication logic (Axios instances, endpoints)  
+├── pages/ → Next.js routes  
+├── features/ → Feature slices (business flows and UI)  
+├── entities/ → Domain entities (types and shared domain logic)  
+├── widgets/ → Page-level UI blocks and layouts  
+├── shared/ → Reusable UI, utilities, and API client  
+│   ├── api/ → HTTP client, query client, and API helpers  
+│   ├── ui/ → Shared UI components (buttons, modals, inputs)  
+│   ├── lib/ → Pure utilities (formatters, helpers)  
+│   └── assets/ → Static assets (images, etc.)  
 ├── styles/ → Global styling configuration (Tailwind, CSS variables)  
-└── utils/ → Helper and utility functions
+└── public/ → Public assets
 
 ---
 
