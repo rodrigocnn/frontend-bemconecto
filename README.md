@@ -9,7 +9,7 @@ This repository contains the **frontend** of the application, focused on deliver
 
 The system allows psychologists to manage patients, view and organize their schedules, record session notes, and analyze key metrics related to their clinical practice — all within a clean and easy-to-use interface.
 
-This frontend consumes a **Node.js + Express** API that handles authentication, business logic, and data persistence.
+This frontend consumes a **.NET** API that handles authentication, business logic, and data persistence.
 
 ---
 
@@ -71,10 +71,10 @@ src/
 ├── entities/ → Domain entities (types and shared domain logic)  
 ├── widgets/ → Page-level UI blocks and layouts  
 ├── shared/ → Reusable UI, utilities, and API client  
-│   ├── api/ → HTTP client, query client, and API helpers  
-│   ├── ui/ → Shared UI components (buttons, modals, inputs)  
-│   ├── lib/ → Pure utilities (formatters, helpers)  
-│   └── assets/ → Static assets (images, etc.)  
+│ ├── api/ → HTTP client, query client, and API helpers  
+│ ├── ui/ → Shared UI components (buttons, modals, inputs)  
+│ ├── lib/ → Pure utilities (formatters, helpers)  
+│ └── assets/ → Static assets (images, etc.)  
 ├── styles/ → Global styling configuration (Tailwind, CSS variables)  
 └── public/ → Public assets
 
