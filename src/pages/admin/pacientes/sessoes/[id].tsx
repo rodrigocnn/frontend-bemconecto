@@ -4,11 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 
 import LayoutAdmin from "@/widgets/admin-layout";
-import { useFindAllSessions } from "@/features/sessions/model/useFindAllSessions";
+import { useFindAllSessions } from "@/features/sessions/model/find-all/useFindAllSessions";
 import { columnsSessions } from "@/features/sessions/ui/columns";
 import { ButtonApp } from "@/shared/ui/button";
 import { PatientSummaryLine } from "@/features/patients/ui/PatientSummaryLine";
-import { useFindPatientSummary } from "@/features/sessions/model/useFindPatientSummary";
+import { useFindPatientSummary } from "@/features/sessions/model/find-all/useFindPatientSummary";
 import { formatDateBR } from "@/shared/lib/date";
 
 export default function Pacientes() {

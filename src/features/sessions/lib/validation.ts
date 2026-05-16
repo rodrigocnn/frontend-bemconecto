@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { FormSession } from "../model/types";
+import { FormSession } from "../model/shared/types";
 
 export const sessionSchema = yup.object().shape({
   summary: yup.string().required("Resumo de sessão é obrigatório"),

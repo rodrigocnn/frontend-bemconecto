@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import LayoutAdmin from "@/widgets/admin-layout";
 import { FormPatient } from "@/features/patients/ui/FormPatient";
-import { usePatientShowQuery } from "@/features/patients/model/usePatientShowQuery";
+import { usePatientShowQuery } from "@/features/patients/model/show/usePatientShowQuery";
 import { Patient } from "@/entities/patient/types";
 
 export default function PatientEdit() {

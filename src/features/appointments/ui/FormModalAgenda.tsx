@@ -15,8 +15,6 @@ export function FormModalAgenda(props: PropsFormModalAgenda) {
   const { register, watch } = form;
   const patientId = watch("patientId");
 
-  console.log("teste", form.getValues("initialTime"));
-
   return (
     <>
       <div className="w-full mb-4">

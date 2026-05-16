@@ -13,18 +13,26 @@ import { ImCheckboxChecked } from "react-icons/im";
 import { CardDashboard } from "@/widgets/admin-dashboard-card";
 import { getChartData } from "@/features/dashboard/lib/charts";
 import { useGetInfoDashboard } from "@/features/dashboard/model/useGetInfoDashboard";
+import { LoadingSpinner } from "@/shared/ui/spinner/LoadingSpinner";
 import LayoutAdmin from "@/widgets/admin-layout";
 
 export default function Home() {
-  const { data } = useGetInfoDashboard();
+  const { data, isLoading } = useGetInfoDashboard();
 
-  // 🔥 centraliza aqui pra não repetir data?.data toda hora
   const dashboard = data?.data;
 
   const { chartData, chartCallServices } = getChartData(
     dashboard?.chartNewPatients || [],
     dashboard?.chartAppointments || [],
   );
+
+  if (isLoading) {
+    return (
+      <LayoutAdmin>
+        <LoadingSpinner />
+      </LayoutAdmin>
+    );
+  }
 
   return (
     <LayoutAdmin>

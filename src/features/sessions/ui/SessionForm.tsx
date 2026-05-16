@@ -2,19 +2,34 @@ import React from "react";
 import { Button } from "flowbite-react";
 import { useRouter } from "next/router";
 
-import { useSessionFormController } from "../model/useSessionFormController";
-import { FormSession } from "../model/types";
+import { useSessionFormUseCase } from "../model/use-case/useSessionFormUseCase";
+import { FormSession } from "../model/shared/types";
+import { useFindSession } from "../model/find-one/useFindSession";
+import { useSessionFormState } from "../model/form/useSessionFormState";
+import { useCreateSession } from "../model/create/useCreateSession";
+import { useEditSession } from "../model/update/useEditSession";
 
 interface SessionFormProps {
-  mode: string;
+  mode: "create" | "edit";
 }
 
 export function SessionForm(props: SessionFormProps) {
   const router = useRouter();
-  const { form, saveSession, handleChange } = useSessionFormController(
-    router.query.id as string,
-    props.mode,
-  );
+  const sessionId = router.query.id as string;
+  const shouldFetch = props.mode === "edit";
+  const findOne = useFindSession(shouldFetch ? sessionId : "");
+  const formState = useSessionFormState({
+    initialData: shouldFetch ? findOne.data?.data : undefined,
+  });
+  const createSession = useCreateSession();
+  const editSession = useEditSession();
+  const { form, saveSession, handleChange } = useSessionFormUseCase({
+    formState,
+    createSession,
+    editSession,
+    patientId: sessionId,
+    mode: props.mode,
+  });
 
   const fields: { name: keyof FormSession; label: string }[] = [
     { name: "summary", label: "Resumo da sessão" },

@@ -5,13 +5,25 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 import LayoutAdmin from "@/widgets/admin-layout";
 import { FormModalAgenda } from "@/features/appointments/ui/FormModalAgenda";
-import { useAppointmentController } from "@/features/appointments/model/useAppointmentController";
-import { useFindAllPatients } from "@/features/patients/model/useFindAllPatients";
-import { useFindAllAppointments } from "@/features/appointments/model/useFindAllAppointments";
+import { useAppointmentUseCase } from "@/features/appointments/model/use-case/useAppointmentUseCase";
+import { useFindAllPatients } from "@/features/patients/model/find-all/useFindAllPatients";
+import { useFindAllAppointments } from "@/features/appointments/model/find-all/useFindAllAppointments";
+import { useAppointmentCreate } from "@/features/appointments/model/create/useAppointmentCreate";
+import { useAppointmentFormState } from "@/features/appointments/model/form/useAppointmentFormState";
+import { useAppointmentModalState } from "@/features/appointments/model/modal/useAppointmentModalState";
+import { useAppointmentUpdate } from "@/features/appointments/model/update/useAppointmentUpdate";
 import { renderEventContent } from "@/features/appointments/ui/renderEventContent";
 import { CustomModal } from "@/shared/ui/modal";
+import { LoadingSpinner } from "@/shared/ui/spinner/LoadingSpinner";
 
 export default function Appointment() {
+  const formState = useAppointmentFormState();
+  const modalState = useAppointmentModalState();
+  const appointmentCreate = useAppointmentCreate();
+  const appointmentUpdate = useAppointmentUpdate();
+  const { data: events, isLoading: isLoadingAppointments } =
+    useFindAllAppointments();
+
   const {
     handleEventClick,
     isModalOpen,
@@ -20,10 +32,25 @@ export default function Appointment() {
     bookAppointment,
     form,
     isModeUpdate,
-  } = useAppointmentController();
+  } = useAppointmentUseCase({
+    appointments: events ?? [],
+    formState,
+    modalState,
+    appointmentCreate,
+    appointmentUpdate,
+  });
 
   const { data: patients, isLoading } = useFindAllPatients();
-  const { data: events } = useFindAllAppointments();
+
+  if (isLoadingAppointments) {
+    return (
+      <LayoutAdmin>
+        <div className="min-h-screen flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+      </LayoutAdmin>
+    );
+  }
 
   return (
     <LayoutAdmin>
@@ -74,14 +101,6 @@ export default function Appointment() {
             }}
             views={{
               listWeek: { buttonText: "Lista" },
-            }}
-            datesSet={(arg) => {
-              console.log(
-                "Mudou de período:",
-                arg.startStr,
-                arg.endStr,
-                arg.view.type
-              );
             }}
           />
         </div>

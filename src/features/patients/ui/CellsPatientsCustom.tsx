@@ -5,7 +5,7 @@ import { BsJournalMedical } from "react-icons/bs";
 import { AiOutlineDelete } from "react-icons/ai";
 import { BiTime } from "react-icons/bi";
 
-import { useColumnsDataGrid } from "../model/useColumnsDatagrid";
+import { useColumnsDataGrid } from "../model/datagrid/useColumnsDatagrid";
 import { CustomModal } from "@/shared/ui/modal";
 
 interface IPropsCellCustomPatients {

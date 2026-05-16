@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DataGrid, GridPaginationModel } from "@mui/x-data-grid";
 import { ptBR } from "@mui/x-data-grid/locales";
 import { useState } from "react";
-import { useFindAllPatients } from "@/features/patients/model/useFindAllPatients";
+import { useFindAllPatients } from "@/features/patients/model/find-all/useFindAllPatients";
 import { columnsPatients } from "@/features/patients/ui/columns";
 
 import { ButtonApp } from "@/shared/ui/button";

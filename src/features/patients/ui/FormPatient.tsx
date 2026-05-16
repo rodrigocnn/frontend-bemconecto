@@ -1,9 +1,11 @@
 import { Label, TextInput, Spinner, Radio, Textarea } from "flowbite-react";
 
-import { usePatientFormController } from "../model/usePatientFormController";
-import { useEffect } from "react";
 import { Patient } from "@/entities/patient/types";
 import { ButtonApp } from "@/shared/ui/button";
+import { usePatientFormUseCase } from "../model/use-case/usePatientFormUseCase";
+import { usePatientFormState } from "../model/form/usePatientFormState";
+import { useCreatePatient } from "../model/create/useCreatePatient";
+import { useUpdatePatient } from "../model/update/useUpdatePatient";
 
 interface FormPatientProps {
   edit?: boolean;
@@ -12,22 +14,22 @@ interface FormPatientProps {
 
 export function FormPatient(props: FormPatientProps) {
   const initialData = props.initialData;
+  const formState = usePatientFormState({ initialData });
+  const createPatient = useCreatePatient();
+  const updatePatient = useUpdatePatient();
 
   const {
     form,
     handleChange,
     handleSubmit,
-    setForm,
-    createPatient,
     handleChangeCPF,
     handleChangePhone,
-  } = usePatientFormController(initialData, props.edit);
-
-  useEffect(() => {
-    if (initialData && Object.keys(initialData).length > 0) {
-      setForm(initialData);
-    }
-  }, [initialData]);
+  } = usePatientFormUseCase({
+    formState,
+    createPatient,
+    updatePatient,
+    edit: props.edit,
+  });
 
   return (
     <div className="bg-white p-4 rounded">
@@ -144,8 +146,9 @@ export function FormPatient(props: FormPatientProps) {
 
           <div className="col-span-2">
             <ButtonApp type="submit">
-              {createPatient.isPending ||
-                (createPatient.isPending && <Spinner color="info" />)}
+              {(props.edit ? updatePatient.isPending : createPatient.isPending) && (
+                <Spinner color="info" />
+              )}
               {props.edit ? "Atualizar" : "Cadastrar"} Paciente
             </ButtonApp>
           </div>

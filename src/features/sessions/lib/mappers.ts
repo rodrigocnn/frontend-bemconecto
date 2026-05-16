@@ -1,4 +1,4 @@
-import { FormSession } from "../model/types";
+import { FormSession } from "../model/shared/types";
 
 export function persistMapperSession(
   form: FormSession,

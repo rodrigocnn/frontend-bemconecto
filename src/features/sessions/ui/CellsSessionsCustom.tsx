@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 
 import { CustomModal } from "@/shared/ui/modal";
-import { useSessionsColumnsDataGrid } from "../model/useSessionsColumnsDatagrid";
+import { useSessionsColumnsDataGrid } from "../model/datagrid/useSessionsColumnsDatagrid";
 
 interface IPropsCellCustomPatients {
   params: GridRenderCellParams;
